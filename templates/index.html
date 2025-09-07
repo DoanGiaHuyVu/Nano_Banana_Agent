@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini Image Generator</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <!-- HERO -->
+      <header class="hero">
+        <h1 class="hero__title">
+          <span class="grad">Hello, there</span><br />
+          <span>How can I help you today?</span>
+        </h1>
+
+        <div class="suggest-grid">
+          <button
+            class="suggest-card"
+            data-suggest="Hi, can you create a 3d rendered image of a pig with wings and a top hat flying over a happy futuristic scifi city with lots of greenery?"
+          >
+            <span>Create a 3D fantasy flying pig over a futuristic city</span>
+            <i class="pill pill-blue" aria-hidden="true"></i>
+          </button>
+          <button
+            class="suggest-card"
+            data-suggest="Generate an illustrated recipe for a paella with step-by-step visuals"
+          >
+            <span>Generate an illustrated recipe with visuals</span>
+            <i class="pill pill-green" aria-hidden="true"></i>
+          </button>
+          <button
+            class="suggest-card"
+            data-suggest="A minimalist logo for a health care company on a solid color background. Include the text Journey."
+          >
+            <span>Design a minimalist healthcare company logo</span>
+            <i class="pill pill-yellow" aria-hidden="true"></i>
+          </button>
+          <button
+            class="suggest-card"
+            data-suggest="Create a photorealistic studio photo of french fries for a high end restaurant, in the style of a food magazine"
+          >
+            <span>Create professional food photography for restaurant</span>
+            <i class="pill pill-purple" aria-hidden="true"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- CHAT -->
+      <main id="chat" class="chat" aria-live="polite"></main>
+
+      <!-- COMPOSER -->
+      <footer class="composer">
+        <div class="plus-wrap">
+          <button
+            id="plusBtn"
+            class="icon-btn"
+            aria-expanded="false"
+            aria-controls="plusMenu"
+            title="More"
+          >
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M12 5v14M5 12h14"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <div id="plusMenu" class="plus-menu" role="menu" hidden>
+            <button class="menu-item" id="menuGoogle" role="menuitem">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <circle cx="12" cy="12" r="8" fill="currentColor" />
+              </svg>
+              <span>Generate — Google preset</span>
+            </button>
+            <button class="menu-item" id="menuManga" role="menuitem">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  d="M4 5h16v12H4zM4 17l4 2h8l4-2"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
+              <span>Generate — Manga preset</span>
+            </button>
+            <button class="menu-item" id="menuBanana" role="menuitem">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                  fill="currentColor"
+                />
+              </svg>
+              <span>Add Banana Character</span>
+            </button>
+            <button class="menu-item" id="menuUpload" role="menuitem">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path
+                  d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <span>Add style image(s) / file(s)</span>
+            </button>
+          </div>
+        </div>
+
+        <input
+          id="promptInput"
+          class="prompt"
+          type="text"
+          placeholder="Ask Gemini"
+          autocomplete="off"
+        />
+
+        <div class="controls">
+          <button id="attachBtn" class="icon-btn" title="Upload">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M8 12l6.5-6.5a3.536 3.536 0 015 5L10.5 19a5 5 0 01-7-7L12 3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <button id="themeBtn" class="icon-btn" title="Theme">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M12 3v2m0 14v2M3 12h2m14 0h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <button id="clearBtn" class="icon-btn" title="Clear chat">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path
+                d="M3 6h18M8 6l1 14h6l1-14M10 10l4 4M14 10l-4 4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+          <button id="sendBtn" class="send-btn" title="Send">
+            <svg viewBox="0 0 24 24" width="22" height="22">
+              <path d="M3 11l18-8-8 18-2-7-8-3z" fill="currentColor" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Hidden inputs -->
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/*,.png,.jpg,.jpeg"
+          multiple
+          hidden
+        />
+      </footer>
+
+      <!-- thumbnails for selected uploads -->
+      <div id="thumbBar" class="thumbbar" hidden></div>
+    </div>
+
+    <!-- Fullscreen viewer -->
+    <div id="viewer" class="viewer" hidden aria-hidden="true">
+      <button
+        id="viewerClose"
+        class="viewer__close"
+        title="Close"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+      <!-- IMPORTANT: empty alt, we set src before showing to avoid any placeholder text -->
+      <img id="viewerImg" class="viewer__img" alt="" />
+    </div>
+
+    <!-- Templates -->
+    <template id="msgTpl">
+      <div class="msg">
+        <div class="msg__bubble"></div>
+      </div>
+    </template>
+
+    <template id="imgTpl">
+      <figure class="imgmsg">
+        <img class="imgmsg__img" alt="generated" />
+        <figcaption class="imgmsg__cap"></figcaption>
+      </figure>
+    </template>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
